@@ -262,6 +262,8 @@ class Request
                     parse_str($this->env['slim.input'], $output);
                 }
                 $this->env['slim.request.form_hash'] = Util::stripSlashesIfMagicQuotes($output);
+            } else if (is_array($this->env['slim.input']) && isset($this->env['slim.input_original'])) {
+                $this->env['slim.request.form_hash'] = Util::stripSlashesIfMagicQuotes($this->env['slim.input']);
             } else {
                 $this->env['slim.request.form_hash'] = Util::stripSlashesIfMagicQuotes($_POST);
             }
